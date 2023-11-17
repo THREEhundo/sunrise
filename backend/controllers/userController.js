@@ -7,7 +7,23 @@ import generateToken from '../utils/generateToken.js'
 // @access	Public
 
 const authUser = asyncHandler(async (req, res) => {
-	res.status(200).json({ message: 'Auth User' })
+	// get email & password from body
+	const { email, password } = req.body
+	// check to see if a current user has that email address
+	const user = await User.findOne({ email })
+
+	// matchPassword is method on userSchema
+	if (user && (await user.matchPasswords(password))) {
+		generateToken(res, user._id)
+		res.status(201).json({
+			_id: user._id,
+			name: user.name,
+			email: user.email
+		})
+	} else {
+		res.status(400)
+		throw new Error('Invalid email or password.')
+	}
 })
 
 // @desc	Register a new user
