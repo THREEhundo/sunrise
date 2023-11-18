@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 dotenv.config()
+import cookieParser from 'cookie-parser'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 const port = process.env.PORT || 8000
 import userRoutes from './routes/userRoutes.js'
@@ -12,6 +13,8 @@ const app = express()
 
 app.use(express.json()) // parse raw json
 app.use(express.urlencoded({ extended: true })) // send form data
+
+app.use(cookieParser())
 
 app.use('/api/users', userRoutes)
 app.get('/', (req, res) => res.send('Server is ready'))
