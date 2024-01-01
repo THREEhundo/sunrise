@@ -1,11 +1,27 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
+import { useLoginMutation } from '../slice/usersApiSlice'
+import { setCredentials } from '../slice/authSlice'
 
 const LoginScreen = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const [login, { isLoading }] = useLoginMutation()
+
+	const { userInfo } = useSelector(state => state.auth)
+
+	useEffect(() => {
+		if (userInfo) {
+			navigate('/')
+		}
+	}, [navigate, userInfo])
 
 	const submitHandler = async e => {
 		e.preventDefault()
