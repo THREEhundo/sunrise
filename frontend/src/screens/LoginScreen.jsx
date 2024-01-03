@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
-import { useLoginMutation } from '../slice/usersApiSlice'
-import { setCredentials } from '../slice/authSlice'
+import { useLoginMutation } from '../slices/usersApiSlice'
+import { setCredentials } from '../slices/authSlice'
+import { toast } from 'react-toastify'
 
 const LoginScreen = () => {
 	const [email, setEmail] = useState('')
@@ -30,7 +31,8 @@ const LoginScreen = () => {
 			dispatch(setCredentials({ ...res }))
 			navigate('/')
 		} catch (err) {
-			console.log(err?.data?.message || err.error)
+			console.log(err?.data?.message || err)
+			toast.error(err?.data?.message || err.error)
 		}
 	}
 
@@ -62,13 +64,13 @@ const LoginScreen = () => {
 				<Button type='submit' variant='primary' className='mt-3'>
 					Sign In
 				</Button>
-
-				<Row className='py-3'>
-					<Col>
-						New Customer?<Link to='/register'>Register</Link>
-					</Col>
-				</Row>
 			</Form>
+
+			<Row className='py-3'>
+				<Col>
+					New Customer?<Link to='/register'>Register</Link>
+				</Col>
+			</Row>
 		</FormContainer>
 	)
 }

@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
 
-// Checks for token, is the JWT in the token, is it verified?
 const protect = asyncHandler(async (req, res, next) => {
 	let token
 
@@ -16,12 +15,13 @@ const protect = asyncHandler(async (req, res, next) => {
 
 			next()
 		} catch (error) {
+			console.error(error)
 			res.status(401)
-			throw new Error('Not authorized, invalid token.')
+			throw new Error('Not authorized, token failed')
 		}
 	} else {
 		res.status(401)
-		throw new Error('Not authorized, no token.')
+		throw new Error('Not authorized, no token')
 	}
 })
 
