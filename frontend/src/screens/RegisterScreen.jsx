@@ -81,7 +81,7 @@ const LoginScreen = () => {
 					<Form.Label>Confirm Password</Form.Label>
 					<Form.Control
 						type='password'
-						placeholder='Enter confirmPassword'
+						placeholder='Confirm Password'
 						value={confirmPassword}
 						onChange={e =>
 							setConfirmPassword(e.target.value)
@@ -97,7 +97,7 @@ const LoginScreen = () => {
 				<Row className='py-3'>
 					<Col>
 						Already have an account?
-						<Link to='/login'>Sign In</Link>
+						<Link to='/login'> Sign In</Link>
 					</Col>
 				</Row>
 			</Form>
