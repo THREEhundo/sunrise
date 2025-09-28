@@ -16,6 +16,8 @@ import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
 import ProfileScreen from './screens/ProfileScreen.jsx'
 import PrivateRoutes from './components/PrivateRoutes.jsx'
+import SleepFormScreen from './screens/SleepFormScreen.jsx'
+import SleepSchedulesScreen from './screens/SleepSchedulesScreen.jsx'
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -27,6 +29,8 @@ const router = createBrowserRouter(
 			<Route path='' element={<PrivateRoutes />}>
 				<Route path='/profile' element={<ProfileScreen />} />
 			</Route>
+			<Route path='/sleepform' element={<SleepFormScreen />}></Route>
+			<Route path='/sleep-schedules' element={<SleepSchedulesScreen />}></Route>
 		</Route>
 	)
 )
